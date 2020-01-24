@@ -1,0 +1,33 @@
+{
+  "name": "legacy-rest-api",
+  "version": "1.0.0",
+  "description": "Documentation and examples of legacy rest api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QM-Quality-Manager/legacy-rest-api.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "v3",
+    "quality",
+    "manager",
+    "qmplus"
+  ],
+  "author": "Christian Kvalheim Amor",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/QM-Quality-Manager/legacy-rest-api/issues"
+  },
+  "homepage": "https://github.com/QM-Quality-Manager/legacy-rest-api#readme",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "request-promise-native": "^1.0.8"
+  }
+}
