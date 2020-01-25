@@ -19,7 +19,8 @@
 //     ]
 //   }
 // }
-const { Department } = require('./department');
+const Department = require('./department');
+const CategoryValue = require('./category_group');
 
 class TextField {
   constructor(document) {
@@ -52,12 +53,25 @@ class Message {
     return new Department(this.__document.department);
   }
 
-  /** The messageTextFields : List<TextField> */
+  /** The messageTextFields : Array<TextField> */
   get messageTextFields() {
     return this.__document.messageTextFields.map(entry => {
       return new TextField(entry);
     });
-  }  
+  }
+
+  /** The categoryValues : Map<Integer, CategoryValue> */
+  get categoryValues() {
+    let mapped = {};
+
+    for (id of this.__document.categoryValues) {
+      mapped[id] = (__document.categoryValues[id] || []).map(
+        entry => new CategoryValue(entry)
+      );
+    }
+
+    return mapped;
+  }
 }
 
 module.exports = Message;
