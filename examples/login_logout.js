@@ -1,6 +1,7 @@
 const { AuthenticationService } = require('../lib/services');
 
-const endPoint = "http://localhost:8080/qmplus/rest";
+// const endPoint = "http://localhost:8080/qmplus/rest";
+const endPoint = null;
 const tenant = "Demokommune";
 const username = "kristian";
 const password = "<your password>";
@@ -10,9 +11,10 @@ const password = "<your password>";
   let loginResult = await authenticationService.login(tenant, username, password);
   let sessionAuthTokenKey = loginResult.authTokenKey;
 
-  console.dir(loginResult)
-  let logoutResult = await authenticationService.logout(sessionAuthTokenKey, tenant, loginResult.userId);
-  console.dir(logoutResult)
+  console.log(sessionAuthTokenKey);
+  // console.dir(loginResult)
+  // let logoutResult = await authenticationService.logout(sessionAuthTokenKey, tenant, loginResult.userId);
+  // console.dir(logoutResult)
   // var options = {
   //   method: 'POST',
   //   uri: endPoint,
