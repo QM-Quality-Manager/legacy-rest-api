@@ -33,6 +33,9 @@ public class BaseService {
     conn.setRequestMethod("POST");
     conn.setRequestProperty("Content-Type", "application/json");
 
+    System.out.println("---------------------- WRITING JSON");
+    System.out.println(json);
+
     // Write the json
     OutputStream os = conn.getOutputStream();
     os.write(json.getBytes());
@@ -47,6 +50,9 @@ public class BaseService {
     BufferedReader br = new BufferedReader(new InputStreamReader(
         (conn.getInputStream())));
     String returnJson = br.lines().collect(Collectors.joining());
+
+    System.out.println("---------------------- READING JSON");
+    System.out.println(returnJson);
 
     // Attempt to deserialize into json object
     ObjectMapper mapper = new ObjectMapper();
