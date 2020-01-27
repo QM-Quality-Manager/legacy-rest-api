@@ -12,9 +12,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class BaseService {
+  private final static Logger logger = Logger.getLogger(BaseService.class.getName());
+
   protected final String endPoint;
 
   public BaseService() {
@@ -33,8 +37,10 @@ public class BaseService {
     conn.setRequestMethod("POST");
     conn.setRequestProperty("Content-Type", "application/json");
 
-    System.out.println("---------------------- WRITING JSON");
-    System.out.println(json);
+    // If debug is enabled
+    if (logger.isLoggable(Level.INFO)) {
+      logger.log(Level.INFO, String.format("Sending to [%s] = [%s]", url.toString(), json));
+    }
 
     // Write the json
     OutputStream os = conn.getOutputStream();
@@ -51,8 +57,10 @@ public class BaseService {
         (conn.getInputStream())));
     String returnJson = br.lines().collect(Collectors.joining());
 
-    System.out.println("---------------------- READING JSON");
-    System.out.println(returnJson);
+    // If debug is enabled
+    if (logger.isLoggable(Level.INFO)) {
+      logger.log(Level.INFO, String.format("Receiving from [%s] = [%s]", url.toString(), returnJson));
+    }
 
     // Attempt to deserialize into json object
     ObjectMapper mapper = new ObjectMapper();

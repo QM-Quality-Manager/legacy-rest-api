@@ -2,6 +2,7 @@ package com.qmplus.v3.api.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.qmplus.v3.api.models.request.LoginRequest;
+import com.qmplus.v3.api.models.request.LogoutRequest;
 import com.qmplus.v3.api.models.response.LoginResponse;
 import com.qmplus.v3.api.models.response.LogoutResponse;
 import com.qmplus.v3.api.models.response.ResponseWrapper;
@@ -18,7 +19,9 @@ public class AuthenticationService extends BaseService {
     super(endPoint);
   }
 
-  LoginResponse login(String tenant, String username, String password) throws IOException {
+  LoginResponse login(
+      String tenant, String username, String password, String clientInfo
+  ) throws IOException {
     LoginRequest request = new LoginRequest();
 
     // Trigger the default random key
@@ -26,6 +29,7 @@ public class AuthenticationService extends BaseService {
     request.setTenant(tenant);
     request.setUsername(username);
     request.setPassword(password);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
 
     // Execute the operation
     ResponseWrapper<LoginResponse> response
@@ -35,7 +39,22 @@ public class AuthenticationService extends BaseService {
     return response.getContent();
   }
 
-  LogoutResponse logout(String authTokenKey, String tenant, String userId) {
-    return null;
+  LogoutResponse logout(
+      String authTokenKey, String tenant, Integer userId, String clientInfo
+  ) throws IOException {
+    LogoutRequest request = new LogoutRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setUserId(userId);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+
+    // Execute the operation
+    ResponseWrapper<LogoutResponse> response
+        = executeOperation(new TypeReference<ResponseWrapper<LogoutResponse>>() {},"user/logout", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
   }
 }

@@ -1,10 +1,14 @@
 package com.qmplus.v3.api.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.qmplus.v3.api.models.request.ImageUploaderRequest;
 import com.qmplus.v3.api.models.request.MessageListRequest;
+import com.qmplus.v3.api.models.request.MessageRequest;
+import com.qmplus.v3.api.models.response.ImageResponse;
 import com.qmplus.v3.api.models.response.MessageResponse;
 import com.qmplus.v3.api.models.response.ResponseWrapper;
 import com.qmplus.v3.api.models.response.ResponseWrapperList;
+import com.qmplus.v3.api.models.vo.VoMessage;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,7 +26,7 @@ public class MessageService extends BaseService {
   public ResponseWrapperList<MessageResponse> messageList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
-      Query query
+      Query query, String clientInfo
   ) throws IOException {
     MessageListRequest request = new MessageListRequest();
 
@@ -31,6 +35,7 @@ public class MessageService extends BaseService {
     request.setTenant(tenant);
     request.setUserLanguageId(userLanguageId);
     request.setCompanyLanguageId(companyLanguageId);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
 
     // Map the query to the request
     mapQueryToRequest(query, request);
@@ -44,7 +49,8 @@ public class MessageService extends BaseService {
 
   public ResponseWrapper<MessageResponse> message(
       String authTokenKey, String tenant,
-      Integer userLanguageId, Integer companyLanguageId, Integer messageId
+      Integer userLanguageId, Integer companyLanguageId,
+      Integer messageId, String clientInfo
   ) throws IOException {
     MessageListRequest request = new MessageListRequest();
 
@@ -54,6 +60,7 @@ public class MessageService extends BaseService {
     request.setUserLanguageId(userLanguageId);
     request.setCompanyLanguageId(companyLanguageId);
     request.setMessageId(messageId);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
 
     // Execute the operation
     ResponseWrapper<ResponseWrapperList<MessageResponse>> response = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<MessageResponse>>>() {},"msg/messageList", toJson(request));
@@ -64,6 +71,49 @@ public class MessageService extends BaseService {
     } else {
       return new ResponseWrapper<>(response.getContent().getContentList().get(0));
     }
+  }
+
+  public MessageResponse save(
+      String authTokenKey, String tenant,
+      VoMessage voMessage, String clientInfo
+  ) throws IOException {
+    MessageRequest request = new MessageRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setVoMessage(voMessage);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+
+    // Execute the operation
+    ResponseWrapper<MessageResponse> response
+        = executeOperation(new TypeReference<ResponseWrapper<MessageResponse>>() {},"msg/save", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
+  }
+
+  public ImageResponse uploadImage(
+      String authTokenKey, String tenant,
+      Integer messageId, String fileName, String fileArr,
+      String clientInfo
+  ) throws IOException {
+    ImageUploaderRequest request = new ImageUploaderRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setMessageId(messageId);
+    request.setFileName(fileName);
+    request.setFileArr(fileArr);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+
+    // Execute the operation
+    ResponseWrapper<ImageResponse> response
+        = executeOperation(new TypeReference<ResponseWrapper<ImageResponse>>() {},"msg/uploadImage", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
   }
 
   private void mapQueryToRequest(Query query, MessageListRequest request) {
