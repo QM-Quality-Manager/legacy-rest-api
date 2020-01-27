@@ -20,7 +20,7 @@ public class CategoryServiceTest extends BaseTest {
   void listCategories() throws IOException {
     CategoryService service = new CategoryService();
     List<CategoryGroupResponse> results = service
-        .categories(getAuthTokenKey(), getTenant(), 1, 1, null, null);
+        .categories(getAuthTokenKey(), getTenant(), getLanguageId(), getLanguageId(), null, null);
     System.out.println();
   }
 }

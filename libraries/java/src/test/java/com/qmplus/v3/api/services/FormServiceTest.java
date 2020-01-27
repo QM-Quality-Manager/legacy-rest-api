@@ -20,7 +20,7 @@ public class FormServiceTest extends BaseTest {
   void listForms() throws IOException {
     FormService service = new FormService();
     List<FormResponse> results = service
-        .formList(getAuthTokenKey(), getTenant(), 1, 1, null, null);
+        .formList(getAuthTokenKey(), getTenant(), getLanguageId(), getLanguageId(), null, null);
     System.out.println();
   }
 }

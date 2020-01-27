@@ -21,7 +21,7 @@ public class TaskServiceTest extends BaseTest {
   void tasks() throws IOException {
     TaskService service = new TaskService();
     List<TaskResponse> results = service
-        .taskList(getAuthTokenKey(), getTenant(), 1, 1, null);
+        .taskList(getAuthTokenKey(), getTenant(), getLanguageId(), getLanguageId(), null);
     System.out.println();
   }
 
@@ -30,7 +30,7 @@ public class TaskServiceTest extends BaseTest {
   void task() throws IOException {
     TaskService service = new TaskService();
     TaskResponse result = service
-        .task(getAuthTokenKey(), getTenant(), 1081, 1, 1, null);
+        .task(getAuthTokenKey(), getTenant(), 1081, getLanguageId(), getLanguageId(), null);
     System.out.println();
   }
 

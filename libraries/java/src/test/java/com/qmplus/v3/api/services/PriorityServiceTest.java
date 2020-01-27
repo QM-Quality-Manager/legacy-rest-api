@@ -20,7 +20,7 @@ public class PriorityServiceTest extends BaseTest {
   void listPriorities() throws IOException {
     PriorityService service = new PriorityService();
     List<PriorityResponse> results = service
-        .priorities(getAuthTokenKey(), getTenant(), 1, 1, null, null);
+        .priorities(getAuthTokenKey(), getTenant(), getLanguageId(), getLanguageId(), null, null);
     System.out.println();
   }
 }

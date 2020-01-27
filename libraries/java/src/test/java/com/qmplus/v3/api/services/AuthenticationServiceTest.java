@@ -7,8 +7,6 @@ import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @Disabled
 class AuthenticationServiceTest extends BaseTest {
   public AuthenticationServiceTest() throws IOException {

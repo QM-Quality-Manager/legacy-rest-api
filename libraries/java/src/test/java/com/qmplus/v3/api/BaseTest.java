@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class BaseTest {
+  protected Integer languageId;
   protected String tenant;
   protected String username;
   protected Integer userId;
@@ -24,6 +25,11 @@ public class BaseTest {
     this.userId = Integer.parseInt(properties.getProperty("userId"));
     this.password = properties.getProperty("password");
     this.authTokenKey = properties.getProperty("authTokenKey");
+    this.languageId = Integer.parseInt(properties.getProperty("languageId"));
+  }
+
+  public Integer getLanguageId() {
+    return languageId;
   }
 
   public String getAuthTokenKey() {

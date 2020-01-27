@@ -33,7 +33,7 @@ public class MessageServiceTest extends BaseTest {
     query.setToDate(formatter.parse("31-01-2019"));
 
     List<MessageResponse> results = service
-        .messageList(getAuthTokenKey(), getTenant(), 1, 1, query, null);
+        .messageList(getAuthTokenKey(), getTenant(), getLanguageId(), getLanguageId(), query, null);
     System.out.println();
   }
 
@@ -48,7 +48,7 @@ public class MessageServiceTest extends BaseTest {
     query.setToDate(formatter.parse("31-01-2019"));
 
     MessageResponse results = service
-        .message(getAuthTokenKey(), getTenant(), 1, 1, 4589, null);
+        .message(getAuthTokenKey(), getTenant(), getLanguageId(), getLanguageId(), 4589, null);
     System.out.println();
   }
 
