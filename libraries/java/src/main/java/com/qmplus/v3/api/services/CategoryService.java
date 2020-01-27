@@ -7,9 +7,10 @@ import com.qmplus.v3.api.models.response.ResponseWrapper;
 import com.qmplus.v3.api.models.response.ResponseWrapperList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CategoryService extends BaseService {
-  CategoryService() {
+  public CategoryService() {
     super();
   }
 
@@ -17,7 +18,7 @@ public class CategoryService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<CategoryGroupResponse> categories(
+  public List<CategoryGroupResponse> categories(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
       String lastUpdated, String clientInfo
@@ -37,6 +38,6 @@ public class CategoryService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<CategoryGroupResponse>>>() {},"sync/categories", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 }

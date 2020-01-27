@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 @Disabled
 public class CategoryServiceTest extends BaseTest {
@@ -19,7 +20,7 @@ public class CategoryServiceTest extends BaseTest {
   @DisplayName("List all categories")
   void listCategories() throws IOException {
     CategoryService service = new CategoryService();
-    ResponseWrapperList<CategoryGroupResponse> results = service
+    List<CategoryGroupResponse> results = service
         .categories(getAuthTokenKey(), getTenant(), 1, 1, null, null);
     System.out.println();
   }

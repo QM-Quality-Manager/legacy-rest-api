@@ -6,6 +6,7 @@ import com.qmplus.v3.api.models.request.LocalizedRequest;
 import com.qmplus.v3.api.models.response.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LocalizationService extends BaseService {
   LocalizationService() {
@@ -16,7 +17,7 @@ public class LocalizationService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<LanguageResponse> languages(
+  public List<LanguageResponse> languages(
       String authTokenKey, String tenant, String clientInfo
   ) throws IOException {
     LanguageRequest request = new LanguageRequest();
@@ -31,10 +32,10 @@ public class LocalizationService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<LanguageResponse>>>() {},"/local/languages", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 
-  public ResponseWrapperList<LocalizedResponse> displayTagNames(
+  public List<LocalizedResponse> displayTagNames(
       String lastUpdated, String clientInfo
   ) throws IOException {
     LocalizedRequest request = new LocalizedRequest();
@@ -48,6 +49,6 @@ public class LocalizationService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<LocalizedResponse>>>() {},"/local/displayTagNames", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 }

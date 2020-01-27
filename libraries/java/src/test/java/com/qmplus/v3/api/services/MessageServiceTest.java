@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Disabled
 public class MessageServiceTest extends BaseTest {
@@ -33,7 +34,7 @@ public class MessageServiceTest extends BaseTest {
     query.setFromDate(formatter.parse("01-01-2019"));
     query.setToDate(formatter.parse("31-01-2019"));
 
-    ResponseWrapperList<MessageResponse> results = service
+    List<MessageResponse> results = service
         .messageList(getAuthTokenKey(), getTenant(), 1, 1, query, null);
     System.out.println();
   }
@@ -48,7 +49,7 @@ public class MessageServiceTest extends BaseTest {
     query.setFromDate(formatter.parse("01-01-2019"));
     query.setToDate(formatter.parse("31-01-2019"));
 
-    ResponseWrapper<MessageResponse> results = service
+    MessageResponse results = service
         .message(getAuthTokenKey(), getTenant(), 1, 1, 4589, null);
     System.out.println();
   }

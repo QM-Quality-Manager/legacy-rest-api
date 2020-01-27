@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 @Disabled
 public class LocalizationServiceTest extends BaseTest {
@@ -20,7 +21,7 @@ public class LocalizationServiceTest extends BaseTest {
   @DisplayName("List all languages")
   void listLanguages() throws IOException {
     LocalizationService service = new LocalizationService();
-    ResponseWrapperList<LanguageResponse> results = service
+    List<LanguageResponse> results = service
         .languages(getAuthTokenKey(), getTenant(), null);
     System.out.println();
   }
@@ -29,7 +30,7 @@ public class LocalizationServiceTest extends BaseTest {
   @DisplayName("List all displayTagNames")
   void displayTagNames() throws IOException {
     LocalizationService service = new LocalizationService();
-    ResponseWrapperList<LocalizedResponse> results = service
+    List<LocalizedResponse> results = service
         .displayTagNames(null, null);
     System.out.println();
   }

@@ -19,7 +19,7 @@ public class TaskService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<TaskResponse> taskList(
+  public List<TaskResponse> taskList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
       String clientInfo
@@ -38,7 +38,7 @@ public class TaskService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<TaskResponse>>>() {},"task/taskList", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 
   public TaskResponse task(

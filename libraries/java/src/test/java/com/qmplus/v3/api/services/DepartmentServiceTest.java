@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +23,7 @@ public class DepartmentServiceTest extends BaseTest {
   void listDepartments() throws IOException {
 //    Logger.getLogger(BaseService.class.getName()).setLevel(Level.OFF);
     DepartmentService service = new DepartmentService();
-    ResponseWrapperList<DepartmentHierarchyResponse> results = service
+    List<DepartmentHierarchyResponse> results = service
         .departments(getAuthTokenKey(), getTenant(), null, null);
     System.out.println();
   }

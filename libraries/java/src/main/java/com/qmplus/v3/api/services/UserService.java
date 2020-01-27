@@ -10,6 +10,7 @@ import com.qmplus.v3.api.models.response.UserTypeResponse;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 public class UserService extends BaseService {
   UserService() {
@@ -20,7 +21,7 @@ public class UserService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<UserResponse> users(
+  public List<UserResponse> users(
       String authTokenKey, String tenant, Date lastUpdated, String clientInfo
   ) throws IOException {
     UserRequest request = new UserRequest();
@@ -35,10 +36,10 @@ public class UserService extends BaseService {
     ResponseWrapper<ResponseWrapperList<UserResponse>> response = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<UserResponse>>>() {},"user/users", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 
-  public ResponseWrapperList<UserTypeResponse> userTypes(
+  public List<UserTypeResponse> userTypes(
       String authTokenKey, String tenant, String userId,
       Integer userLanguageId, Integer companyLanguageId,
       String clientInfo
@@ -57,6 +58,6 @@ public class UserService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<UserTypeResponse>>>() {},"user/users", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 }

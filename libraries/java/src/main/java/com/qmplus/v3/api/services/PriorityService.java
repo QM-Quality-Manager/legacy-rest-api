@@ -7,6 +7,7 @@ import com.qmplus.v3.api.models.response.ResponseWrapper;
 import com.qmplus.v3.api.models.response.ResponseWrapperList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class PriorityService extends BaseService {
   PriorityService() {
@@ -17,7 +18,7 @@ public class PriorityService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<PriorityResponse> priorities(
+  public List<PriorityResponse> priorities(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
       String lastUpdated, String clientInfo
@@ -33,9 +34,10 @@ public class PriorityService extends BaseService {
     request.setClientInfo(clientInfo != null ? clientInfo : "");
 
     // Execute the operation
-    ResponseWrapper<ResponseWrapperList<PriorityResponse>> response = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<PriorityResponse>>>() {},"sync/priorities", toJson(request));
+    ResponseWrapper<ResponseWrapperList<PriorityResponse>> response
+        = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<PriorityResponse>>>() {},"sync/priorities", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 }

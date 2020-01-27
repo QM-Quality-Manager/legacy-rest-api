@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 @Disabled
 public class PriorityServiceTest extends BaseTest {
@@ -19,7 +20,7 @@ public class PriorityServiceTest extends BaseTest {
   @DisplayName("List all priorities")
   void listPriorities() throws IOException {
     PriorityService service = new PriorityService();
-    ResponseWrapperList<PriorityResponse> results = service
+    List<PriorityResponse> results = service
         .priorities(getAuthTokenKey(), getTenant(), 1, 1, null, null);
     System.out.println();
   }

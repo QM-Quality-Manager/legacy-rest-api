@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +22,7 @@ class UserServiceTest extends BaseTest {
   @DisplayName("List all usernames")
   void users() throws IOException {
     UserService service = new UserService();
-    ResponseWrapperList<UserResponse> results = service
+    List<UserResponse> results = service
         .users(getAuthTokenKey(), getTenant(), null, null);
     System.out.println();
   }

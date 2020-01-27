@@ -7,6 +7,7 @@ import com.qmplus.v3.api.models.response.ResponseWrapper;
 import com.qmplus.v3.api.models.response.ResponseWrapperList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DepartmentService extends BaseService {
   DepartmentService() {
@@ -17,7 +18,7 @@ public class DepartmentService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<DepartmentHierarchyResponse> departments(
+  public List<DepartmentHierarchyResponse> departments(
       String authTokenKey, String tenant, String lastUpdated, String clientInfo
   ) throws IOException {
     DepartmentHierarchyRequest request = new DepartmentHierarchyRequest();
@@ -33,6 +34,6 @@ public class DepartmentService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<DepartmentHierarchyResponse>>>() {},"sync/departments", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 }

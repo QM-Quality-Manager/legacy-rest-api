@@ -7,6 +7,7 @@ import com.qmplus.v3.api.models.response.ResponseWrapper;
 import com.qmplus.v3.api.models.response.ResponseWrapperList;
 
 import java.io.IOException;
+import java.util.List;
 
 public class FormService extends BaseService {
   FormService() {
@@ -17,7 +18,7 @@ public class FormService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<FormResponse> formList(
+  public List<FormResponse> formList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
       String lastUpdated, String clientInfo
@@ -37,6 +38,6 @@ public class FormService extends BaseService {
         = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<FormResponse>>>() {},"sync/formList", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 }

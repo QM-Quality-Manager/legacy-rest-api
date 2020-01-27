@@ -23,7 +23,7 @@ public class MessageService extends BaseService {
     super(endPoint);
   }
 
-  public ResponseWrapperList<MessageResponse> messageList(
+  public List<MessageResponse> messageList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
       Query query, String clientInfo
@@ -44,10 +44,10 @@ public class MessageService extends BaseService {
     ResponseWrapper<ResponseWrapperList<MessageResponse>> response = executeOperation(new TypeReference<ResponseWrapper<ResponseWrapperList<MessageResponse>>>() {},"msg/messageList", toJson(request));
 
     // Return the content object if everything went well
-    return response.getContent();
+    return response.getContent().getContentList();
   }
 
-  public ResponseWrapper<MessageResponse> message(
+  public MessageResponse message(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
       Integer messageId, String clientInfo
@@ -67,9 +67,9 @@ public class MessageService extends BaseService {
 
     // Return the content object if everything went well
     if (response.getContent().getContentList().isEmpty()) {
-      return new ResponseWrapper<>(null);
+      return null;
     } else {
-      return new ResponseWrapper<>(response.getContent().getContentList().get(0));
+      return response.getContent().getContentList().get(0);
     }
   }
 

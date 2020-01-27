@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 @Disabled
 public class FormServiceTest extends BaseTest {
@@ -19,7 +20,7 @@ public class FormServiceTest extends BaseTest {
   @DisplayName("List all forms")
   void listForms() throws IOException {
     FormService service = new FormService();
-    ResponseWrapperList<FormResponse> results = service
+    List<FormResponse> results = service
         .formList(getAuthTokenKey(), getTenant(), 1, 1, null, null);
     System.out.println();
   }

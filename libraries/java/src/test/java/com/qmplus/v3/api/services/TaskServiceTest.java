@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @Disabled
 public class TaskServiceTest extends BaseTest {
@@ -21,7 +22,7 @@ public class TaskServiceTest extends BaseTest {
   @DisplayName("List all tasks")
   void tasks() throws IOException {
     TaskService service = new TaskService();
-    ResponseWrapperList<TaskResponse> results = service
+    List<TaskResponse> results = service
         .taskList(getAuthTokenKey(), getTenant(), 1, 1, null);
     System.out.println();
   }
