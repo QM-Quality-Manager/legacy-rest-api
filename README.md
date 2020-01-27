@@ -5,8 +5,8 @@ There are two apis provided but only the Java based one is complete and tested a
 
 | Folder | Decscription |
 | --- | --- |
-| `libraries/java` | A Java 1.8 compatible library for `V3` |
-| `libraries/node` | A Node.js compatible library for `V3`|
+| [`libraries/java`](libraries/java) | A Java 1.8 compatible library for `V3` |
+| [`libraries/node`](libraries/node) | A Node.js compatible library for `V3`|
 
 ## Support
 
