@@ -1,9 +1,7 @@
 package com.qmplus.v3.api.services;
 
 import com.qmplus.v3.api.BaseTest;
-import com.qmplus.v3.api.models.response.ResponseWrapperList;
 import com.qmplus.v3.api.models.response.TaskResponse;
-import com.qmplus.v3.api.models.response.UserResponse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
