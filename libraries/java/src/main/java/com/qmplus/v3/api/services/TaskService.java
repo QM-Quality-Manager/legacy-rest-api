@@ -10,15 +10,29 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The TaskService lets us list tasks available and mark specific tasks as done.
+ */
 public class TaskService extends BaseService {
-  TaskService() {
+  public TaskService() {
     super();
   }
 
-  TaskService(String endPoint) {
+  public TaskService(String endPoint) {
     super(endPoint);
   }
 
+  /**
+   * List the tasks available.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of TaskResponse entries.
+   * @throws IOException Throws an IOException.
+   */
   public List<TaskResponse> taskList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
@@ -41,6 +55,18 @@ public class TaskService extends BaseService {
     return response.getContent().getContentList();
   }
 
+  /**
+   * Return a specific task by its taskId.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param taskId The id of the task to retrieve.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a TaskResponse instance.
+   * @throws IOException Throws an IOException.
+   */
   public TaskResponse task(
       String authTokenKey, String tenant, Integer taskId,
       Integer userLanguageId, Integer companyLanguageId,
@@ -68,6 +94,20 @@ public class TaskService extends BaseService {
     }
   }
 
+  /**
+   * Mark a specific task as done.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param taskId The id of the task to retrieve.
+   * @param comment Store a comment on the task when marking it as done.
+   * @param taskDoneDate The date the task was done.
+   * @param taskDone A Boolean marking if the task was done.
+   * @param registeredHours A set of registered hours against the task.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Return a TaskResponse instance for a successful marking of a task as done.
+   * @throws IOException Throws an IOException.
+   */
   public TaskResponse done(
       String authTokenKey, String tenant,
       Integer taskId, String comment, Date taskDoneDate, Boolean taskDone,

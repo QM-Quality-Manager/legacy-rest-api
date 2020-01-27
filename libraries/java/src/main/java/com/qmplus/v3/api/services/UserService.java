@@ -12,15 +12,29 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The UserService represents user specific operations such as listing the users for
+ * a tenant or the available user types.
+ */
 public class UserService extends BaseService {
-  UserService() {
+  public UserService() {
     super();
   }
 
-  UserService(String endPoint) {
+  public UserService(String endPoint) {
     super(endPoint);
   }
 
+  /**
+   * Retrieve the list of users
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param lastUpdated Filter by lastUpdated date.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of UserResponse instances.
+   * @throws IOException Throws an IOException.
+   */
   public List<UserResponse> users(
       String authTokenKey, String tenant, Date lastUpdated, String clientInfo
   ) throws IOException {
@@ -39,6 +53,18 @@ public class UserService extends BaseService {
     return response.getContent().getContentList();
   }
 
+  /**
+   * Retrieve the list of UserTypes available for a tenant user.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userId The userId of the user we are retrieving user types for.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of UserTypeResponse instances.
+   * @throws IOException Throws an IOException.
+   */
   public List<UserTypeResponse> userTypes(
       String authTokenKey, String tenant, String userId,
       Integer userLanguageId, Integer companyLanguageId,

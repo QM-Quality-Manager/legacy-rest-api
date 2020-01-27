@@ -8,15 +8,27 @@ import com.qmplus.v3.api.models.response.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The LocalizationService handles all localization functionality of the API.
+ */
 public class LocalizationService extends BaseService {
-  LocalizationService() {
+  public LocalizationService() {
     super();
   }
 
-  LocalizationService(String endPoint) {
+  public LocalizationService(String endPoint) {
     super(endPoint);
   }
 
+  /**
+   * Return a list of LanguageResponse entries.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of LanguageResponse responses.
+   * @throws IOException Throws an IOException.
+   */
   public List<LanguageResponse> languages(
       String authTokenKey, String tenant, String clientInfo
   ) throws IOException {

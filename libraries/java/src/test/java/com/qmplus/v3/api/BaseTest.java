@@ -3,6 +3,7 @@ package com.qmplus.v3.api;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 public class BaseTest {
@@ -27,6 +28,8 @@ public class BaseTest {
     this.authTokenKey = properties.getProperty("authTokenKey");
     this.languageId = Integer.parseInt(properties.getProperty("languageId"));
   }
+
+  protected SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
   public Integer getLanguageId() {
     return languageId;

@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 @Disabled
 public class DepartmentServiceTest extends BaseTest {
-  DepartmentServiceTest() throws IOException {
+  public DepartmentServiceTest() throws IOException {
     super();
   }
 

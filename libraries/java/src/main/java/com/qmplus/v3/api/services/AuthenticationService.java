@@ -10,16 +10,29 @@ import com.qmplus.v3.api.models.util.RestConstants;
 
 import java.io.IOException;
 
+/**
+ * Handles all the Authentication services
+ */
 public class AuthenticationService extends BaseService {
-  AuthenticationService() {
+  public AuthenticationService() {
     super();
   }
 
-  AuthenticationService(String endPoint) {
+  public AuthenticationService(String endPoint) {
     super(endPoint);
   }
 
-  LoginResponse login(
+  /**
+   * Login a user
+   *
+   * @param tenant The name of the tenant.
+   * @param username The username.
+   * @param password The users password.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a LoginResponse with all the user login details.
+   * @throws IOException Throws an IOException.
+   */
+  public LoginResponse login(
       String tenant, String username, String password, String clientInfo
   ) throws IOException {
     LoginRequest request = new LoginRequest();
@@ -39,7 +52,17 @@ public class AuthenticationService extends BaseService {
     return response.getContent();
   }
 
-  LogoutResponse logout(
+  /**
+   * Logout an existing user
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userId The user id of the user we are logging out (must match with the auth token).
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a LogoutResponse with the details of the logged out user.
+   * @throws IOException Throws an IOException.
+   */
+  public LogoutResponse logout(
       String authTokenKey, String tenant, Integer userId, String clientInfo
   ) throws IOException {
     LogoutRequest request = new LogoutRequest();

@@ -9,15 +9,30 @@ import com.qmplus.v3.api.models.response.ResponseWrapperList;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Returns all defined forms
+ */
 public class FormService extends BaseService {
-  FormService() {
+  public FormService() {
     super();
   }
 
-  FormService(String endPoint) {
+  public FormService(String endPoint) {
     super(endPoint);
   }
 
+  /**
+   * Returns a list of FormResponse's
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param lastUpdated Filter by lastUpdated date.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of FormResponse responses.
+   * @throws IOException Throws an IOException.
+   */
   public List<FormResponse> formList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,

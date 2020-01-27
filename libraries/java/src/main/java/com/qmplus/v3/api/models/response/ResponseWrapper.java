@@ -11,7 +11,7 @@ import java.util.List;
  * @author vipul.vohra
  * @author gaurav.chugh
  *
- * @param <T>
+ * @param <T> ResponseWrapper is a Generic wrapper around the returned HTTP result
  */
 public class ResponseWrapper<T>
 {

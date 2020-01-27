@@ -91,6 +91,16 @@ System.out.println("languageId = " + login.getLanguageId());
 
 Fill in the properties file with the values you specified and you are ready to go. Note however that some of the tests are dependent on data existing so don't expect the ones that specifically target a named `messageId` or `taskId` to work. They are there more as a reference of valid system call to `Quality Manager`.
 
+## Build JavaDocs
+
+To build the `Javadocs` run the following gradle command.
+
+```
+./gradlew javadoc
+```
+
+You can find the generated `Javadocs` under the directory `./build/docs`.
+
 ## Examples
 
 Make sure you have set up the `credential.properties` file and take a look at the more extensive usage examples written as `Junit 5` tests. These should be able to be run against your target tenant and will deliver results dependent on what has been registered on the platform.
@@ -100,3 +110,9 @@ All files can be found at `./src/test/java/com/qmplus/v3/api/examples`.
 | Name | File | Description |
 | --- | --- | --- |
 | Examples of extracting messages | `ExtractDataExampleTest.java` | Contains examples on how to extract `message` data from V3 and what additional data is needed to make sense of the messages retrieved. |
+
+### Notes for `ExtractDataExampleTest.java`
+
+Note that we have to query via the forms. The reason is that the messages themselves do not contain any information about the originating form. Thus if we want to find the entries for a form called `Avvik` we need to first query the `forms` API, filter out the right form by its name and then get the `formId` from it.
+
+We can then query for the messages by passing in the `formId` and assume the returned messages are results only for the specific `form` we wanted.

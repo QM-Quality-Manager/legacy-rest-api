@@ -14,15 +14,30 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The MessageService handles all functionality associated with messages.
+ */
 public class MessageService extends BaseService {
-  MessageService() {
+  public MessageService() {
     super();
   }
 
-  MessageService(String endPoint) {
+  public MessageService(String endPoint) {
     super(endPoint);
   }
 
+  /**
+   * Returns a list of MessageResponse entries.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param query An object that represents the available query options for the messageList endpoint.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of MessageResponse entries.
+   * @throws IOException Throws an IOException.
+   */
   public List<MessageResponse> messageList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
@@ -47,6 +62,18 @@ public class MessageService extends BaseService {
     return response.getContent().getContentList();
   }
 
+  /**
+   * Return a specific message.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param messageId The Id of the message you want to fetch.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns the matching MessageResponse entry.
+   * @throws IOException Throws an IOException.
+   */
   public MessageResponse message(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
@@ -73,6 +100,16 @@ public class MessageService extends BaseService {
     }
   }
 
+  /**
+   * Create a new message.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param voMessage The VoMessage instance represents a new message object.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a MessageResponse object for a successful message creation.
+   * @throws IOException Throws an IOException.
+   */
   public MessageResponse save(
       String authTokenKey, String tenant,
       VoMessage voMessage, String clientInfo
@@ -93,6 +130,18 @@ public class MessageService extends BaseService {
     return response.getContent();
   }
 
+  /**
+   * Upload an image to an existing message.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param messageId The Id of the message you want to fetch.
+   * @param fileName The name of the file we are uploading.
+   * @param fileArr A BASE64 encoded string that represents the binary data.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns an ImageResponse entity on a successful upload of an image.
+   * @throws IOException Throws an IOException.
+   */
   public ImageResponse uploadImage(
       String authTokenKey, String tenant,
       Integer messageId, String fileName, String fileArr,
@@ -155,6 +204,9 @@ public class MessageService extends BaseService {
     }
   }
 
+  /**
+   * Represents a set of Query filters to be applied to the messageList queries.
+   */
   public static class Query {
     /* Get only messages registered in this time span */
     private Date fromDate;

@@ -9,15 +9,30 @@ import com.qmplus.v3.api.models.response.ResponseWrapperList;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The PriorityService allows to retrieve all priority objects for a tenant.
+ */
 public class PriorityService extends BaseService {
-  PriorityService() {
+  public PriorityService() {
     super();
   }
 
-  PriorityService(String endPoint) {
+  public PriorityService(String endPoint) {
     super(endPoint);
   }
 
+  /**
+   * List all available priority objects for a specific tenant.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param userLanguageId The user language id for the query (languages can be gotten from the LocalizationService).
+   * @param companyLanguageId The company language id for the query (languages can be gotten from the LocalizationService).
+   * @param lastUpdated Filter by lastUpdated date.
+   * @param clientInfo A text string representing information about the calling client.
+   * @return Returns a list of PriorityResponse entries.
+   * @throws IOException Throws an IOException.
+   */
   public List<PriorityResponse> priorities(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,

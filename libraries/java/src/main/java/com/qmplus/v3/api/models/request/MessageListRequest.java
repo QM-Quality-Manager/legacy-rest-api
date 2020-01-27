@@ -77,7 +77,7 @@ public class MessageListRequest extends BaseRequest
   /**
    * Set the messageId search parameter
    *
-   * @param messageId
+   * @param messageId The message id
    */
   public void setMessageId(Integer messageId)
   {
@@ -157,7 +157,7 @@ public class MessageListRequest extends BaseRequest
   }
 
   /**
-   * @param categoryList the categoryList to set
+   * @param categoryIdList the categoryList to set
    */
   public void setCategoryList(List<Integer> categoryIdList)
   {
@@ -210,7 +210,7 @@ public class MessageListRequest extends BaseRequest
    * 2 = MEDIUM
    * 3 = HIGH
    *
-   * @param priority
+   * @param priority The priority of the message
    */
   public void setPriority(int priority)
   {
@@ -228,7 +228,7 @@ public class MessageListRequest extends BaseRequest
   /**
    * Set the status search parameter
    *
-   * @param statusList
+   * @param statusList The list of statuses associated with the message
    */
   public void setStatusList(List<Integer> statusList)
   {
@@ -247,7 +247,7 @@ public class MessageListRequest extends BaseRequest
    * Set the message type search parameter
    * FAULT 1, LIST - COMMENT 2, LOG 3, RISK 4, REPORT 5
    *
-   * @param messageType
+   * @param messageType The message type
    */
   public void setMessageType(int messageType)
   {
