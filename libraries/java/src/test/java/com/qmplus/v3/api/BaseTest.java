@@ -19,7 +19,6 @@ public class BaseTest {
     Properties properties = new Properties();
     properties.load(getClass().getClassLoader().getResourceAsStream("./credentials.properties"));
 
-
     // Read the entries
     this.tenant = properties.getProperty("tenant");
     this.username = properties.getProperty("username");
