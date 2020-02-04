@@ -1,5 +1,6 @@
 package com.qmplus.v3.api.models.response;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ public class MessageResponse
   // Category groupId -> List <CategoryValueResponse>
   private Map<Integer,List<CategoryValueResponse>> categoryValues;
   private DepartmentHierarchyResponse department;
+  private Date registerDate;
+  private List<Integer> closedTime;
 
   public Integer getMessageId()
   {
@@ -27,6 +30,26 @@ public class MessageResponse
   public void setMessageId(Integer messageId)
   {
     this.messageId = messageId;
+  }
+
+  public Date getRegisterDate()
+  {
+    return registerDate;
+  }
+
+  public void setRegisterDate(Date registerDate)
+  {
+    this.registerDate = registerDate;
+  }
+
+  public List<Integer> getClosedTime()
+  {
+    return closedTime;
+  }
+
+  public void setClosedTime(List<Integer> closedTime)
+  {
+    this.closedTime = closedTime;
   }
 
   /**

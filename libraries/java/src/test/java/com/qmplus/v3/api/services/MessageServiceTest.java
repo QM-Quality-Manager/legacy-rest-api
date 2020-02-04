@@ -16,7 +16,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-@Disabled
+//@Disabled
 public class MessageServiceTest extends BaseTest {
   public MessageServiceTest() throws IOException {
     super();
