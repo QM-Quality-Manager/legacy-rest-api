@@ -31,4 +31,15 @@ class AuthenticationServiceTest extends BaseTest {
     LogoutResponse logout = service.logout(login.getAuthTokenKey(), login.getTenantName(), login.getUserId(), null);
     System.out.println();
   }
+
+//  @Test
+//  @DisplayName("Correctly login and logout agder")
+//  void throwaway() throws IOException {
+//    AuthenticationService service = new AuthenticationService("http://localhost:8080/qmplus/rest");
+//    LoginResponse login = service.login("agder", "qmtest", "Quality19!", null);
+//    System.out.println();
+//
+//    LogoutResponse logout = service.logout(login.getAuthTokenKey(), login.getTenantName(), login.getUserId(), null);
+//    System.out.println();
+//  }
 }

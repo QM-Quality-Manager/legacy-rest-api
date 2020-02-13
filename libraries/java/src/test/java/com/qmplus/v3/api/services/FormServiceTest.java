@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-@Disabled
+//@Disabled
 public class FormServiceTest extends BaseTest {
   public FormServiceTest() throws IOException {
     super();

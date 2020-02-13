@@ -36,7 +36,7 @@ public class TaskService extends BaseService {
   public List<TaskResponse> taskList(
       String authTokenKey, String tenant,
       Integer userLanguageId, Integer companyLanguageId,
-      String clientInfo
+      String clientInfo, Date lastUpdated
   ) throws IOException {
     TaskRequest request = new TaskRequest();
 
@@ -46,6 +46,7 @@ public class TaskService extends BaseService {
     request.setUserLanguageId(userLanguageId);
     request.setCompanyLanguageId(companyLanguageId);
     request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setLastUpdated(lastUpdated != null ? String.format("%d", lastUpdated.getTime()) : "");
 
     // Execute the operation
     ResponseWrapper<ResponseWrapperList<TaskResponse>> response
@@ -81,6 +82,7 @@ public class TaskService extends BaseService {
     request.setUserLanguageId(userLanguageId);
     request.setCompanyLanguageId(companyLanguageId);
     request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setLastUpdated("");
 
     // Execute the operation
     ResponseWrapper<ResponseWrapperList<TaskResponse>> response
