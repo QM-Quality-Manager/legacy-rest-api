@@ -28,8 +28,8 @@ public class TaskServiceTest extends BaseTest {
   @Test
   @DisplayName("List a single task")
   void task() throws IOException {
-//    TaskService service = new TaskService("http://localhost:8080/qmplus/rest");
-    TaskService service = new TaskService();
+    TaskService service = new TaskService("http://localhost:8080/qmplus/rest");
+//    TaskService service = new TaskService();
     TaskResponse result = service
         .task(getAuthTokenKey(), getTenant(), 1367, getLanguageId(), getLanguageId(), null);
     System.out.println();
