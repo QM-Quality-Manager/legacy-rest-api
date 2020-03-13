@@ -1,14 +1,12 @@
 package com.qmplus.v3.api.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.qmplus.v3.api.models.request.LDAPSettingsRequest;
-import com.qmplus.v3.api.models.request.LDAPStatusRequest;
-import com.qmplus.v3.api.models.request.LDAPUserRequest;
-import com.qmplus.v3.api.models.request.MessageRequest;
+import com.qmplus.v3.api.models.request.*;
 import com.qmplus.v3.api.models.response.*;
 import com.qmplus.v3.api.models.vo.VoMessage;
 
 import java.io.IOException;
+import java.util.Properties;
 
 public class LDAPService extends BaseService {
 
@@ -71,6 +69,122 @@ public class LDAPService extends BaseService {
     // Execute the operation
     ResponseWrapper<LDAPUserResponse> response
       = executeOperation(new TypeReference<ResponseWrapper<LDAPUserResponse>>() {},"ldap/user/ldap", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
+  }
+
+  /**
+   * Retrieve LDAP information for a given department by department id.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param clientInfo A text string representing information about the calling client.
+   * @param departmentId The department id.
+   * @return Returns a LDAPSettingsResponse object for a successful status query.
+   * @throws IOException Throws an IOException.
+   */
+  public LDAPDepartmentInfoResponse departmentInfoById(
+    String authTokenKey, String tenant, String clientInfo, Integer departmentId
+  ) throws IOException {
+    LDAPDepartmentInfoRequest request = new LDAPDepartmentInfoRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setId(departmentId);
+
+    // Execute the operation
+    ResponseWrapper<LDAPDepartmentInfoResponse> response
+      = executeOperation(new TypeReference<ResponseWrapper<LDAPDepartmentInfoResponse>>() {},"ldap/department/info", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
+  }
+
+  /**
+   * Retrieve LDAP information for a given department by department name.
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param clientInfo A text string representing information about the calling client.
+   * @param departmentName The department name.
+   * @return Returns a LDAPSettingsResponse object for a successful status query.
+   * @throws IOException Throws an IOException.
+   */
+  public LDAPDepartmentInfoResponse departmentInfoByName(
+    String authTokenKey, String tenant, String clientInfo, String departmentName
+  ) throws IOException {
+    LDAPDepartmentInfoRequest request = new LDAPDepartmentInfoRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setName(departmentName);
+
+    // Execute the operation
+    ResponseWrapper<LDAPDepartmentInfoResponse> response
+      = executeOperation(new TypeReference<ResponseWrapper<LDAPDepartmentInfoResponse>>() {},"ldap/department/info", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
+  }
+
+  /**
+   * Retrieve LDAP results from the departments LDAP filters
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param clientInfo A text string representing information about the calling client.
+   * @param departmentId The department id.
+   * @return Returns a LDAPSettingsResponse object for a successful status query.
+   * @throws IOException Throws an IOException.
+   */
+  public LDAPDepartmentQueryResponse departmentQueryById(
+    String authTokenKey, String tenant, String clientInfo, Integer departmentId
+  ) throws IOException {
+    LDAPDepartmentQueryRequest request = new LDAPDepartmentQueryRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setId(departmentId);
+
+    // Execute the operation
+    ResponseWrapper<LDAPDepartmentQueryResponse> response
+      = executeOperation(new TypeReference<ResponseWrapper<LDAPDepartmentQueryResponse>>() {},"ldap/department/query", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
+  }
+
+  /**
+   * Retrieve LDAP results from the departments LDAP filters
+   *
+   * @param authTokenKey The auth token of the user we are going to log out.
+   * @param tenant The name of the tenant.
+   * @param clientInfo A text string representing information about the calling client.
+   * @param departmentName The department name.
+   * @return Returns a LDAPSettingsResponse object for a successful status query.
+   * @throws IOException Throws an IOException.
+   */
+  public LDAPDepartmentQueryResponse departmentQueryByName(
+    String authTokenKey, String tenant, String clientInfo, String departmentName
+  ) throws IOException {
+    LDAPDepartmentQueryRequest request = new LDAPDepartmentQueryRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setName(departmentName);
+
+    // Execute the operation
+    ResponseWrapper<LDAPDepartmentQueryResponse> response
+      = executeOperation(new TypeReference<ResponseWrapper<LDAPDepartmentQueryResponse>>() {},"ldap/department/query", toJson(request));
 
     // Return the content object if everything went well
     return response.getContent();
