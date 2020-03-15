@@ -1,11 +1,13 @@
 package com.qmplus.v3.api.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.qmplus.v3.api.models.request.*;
 import com.qmplus.v3.api.models.response.*;
 import com.qmplus.v3.api.models.vo.VoMessage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 public class LDAPService extends BaseService {
@@ -213,6 +215,27 @@ public class LDAPService extends BaseService {
     // Execute the operation
     ResponseWrapper<LDAPSettingsResponse> response
       = executeOperation(new TypeReference<ResponseWrapper<LDAPSettingsResponse>>() {},"ldap/settings", toJson(request));
+
+    // Return the content object if everything went well
+    return response.getContent();
+  }
+
+  public LDAPQueryResponse query(
+    String authTokenKey, String tenant, String clientInfo,
+    String searchBase, List<String> filters
+  ) throws IOException {
+    LDAPQueryRequest request = new LDAPQueryRequest();
+
+    // Trigger the default random key
+    request.setAuthTokenKey(authTokenKey);
+    request.setTenant(tenant);
+    request.setClientInfo(clientInfo != null ? clientInfo : "");
+    request.setSearchBase(searchBase);
+    request.setFilters(filters);
+
+    // Execute the operation
+    ResponseWrapper<LDAPQueryResponse> response
+      = executeOperation(new TypeReference<ResponseWrapper<LDAPQueryResponse>>() {},"ldap/query", toJson(request));
 
     // Return the content object if everything went well
     return response.getContent();

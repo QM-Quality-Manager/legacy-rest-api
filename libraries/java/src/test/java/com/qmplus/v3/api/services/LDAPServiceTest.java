@@ -2,6 +2,7 @@ package com.qmplus.v3.api.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.qmplus.v3.api.BaseTest;
 import com.qmplus.v3.api.models.response.*;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Properties;
 
 public class LDAPServiceTest extends BaseTest {
@@ -131,6 +133,23 @@ public class LDAPServiceTest extends BaseTest {
     LDAPService service = new LDAPService(endPoint);
     LDAPDepartmentQueryResponse result = service
       .departmentQueryByName(authTokenKey, tenant, null, departmentName);
+
+    jsonToConsole(result);
+
+//    authenticationService.logout(login.getAuthTokenKey(), tenant, login.getUserId(), null);
+  }
+
+  @Test
+  @DisplayName("Execute custom LDAP query")
+  void ldapCustomQuery() throws IOException, ParseException {
+    String departmentName = "1501001 - Interkommunal arbeidsgiverkontroll i Agder";
+
+    AuthenticationService authenticationService = new AuthenticationService(endPoint);
+//    LoginResponse login = authenticationService.login(tenant, user, password, null);
+
+    LDAPService service = new LDAPService(endPoint);
+    LDAPQueryResponse result = service
+      .query(authTokenKey, tenant, null, "OU=Kunder,DC=ikta,DC=local", Arrays.asList("(&(objectClass=user)(departmentNumber=7020906_1501001))"));
 
     jsonToConsole(result);
 
