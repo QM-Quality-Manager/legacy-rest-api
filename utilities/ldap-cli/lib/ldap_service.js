@@ -6,6 +6,30 @@ class LDAPService extends BaseService {
   }
 
   /**
+   * Perform an ad-hoc query to the configured LDAP servers allowing you to test queries.
+   * @param authTokenKey The user's authTokenKey
+   * @param tenant The user's tenant (organization name)
+   * @param searchbase The LDAP query searchbase.
+   * @param filters A list of filters to apply to the query.
+   * @returns Status
+   */
+  async query(authTokenKey, tenant, searchbase, filters) {
+    let result = await this.executeOperation("/ldap/query", {
+      authTokenKey: authTokenKey,
+      tenant: tenant,
+      clientInfo: "mobile",
+      searchBase: searchbase,
+      filters: filters
+    });
+
+    if (result) {
+      return result.content;
+    } else {
+      throw Error(`failed to execute the ldap query for tenant ${tenant}`);
+    }    
+  }
+
+  /**
    * Retrieve the ldap status for a tenant
    * @param authTokenKey The user's authTokenKey
    * @param tenant The user's tenant (organization name)

@@ -2,6 +2,14 @@ const program = require('commander');
 const AuthService = require('./lib/auth_service');
 const LDAPService = require('./lib/ldap_service');
 const fs = require('fs');
+const status = require('./lib/commands/status');
+const settings = require('./lib/commands/settings');
+const query = require('./lib/commands/query');
+const departmentQueryById = require('./lib/commands/department_query_by_id');
+const departmentQueryByName = require('./lib/commands/department_query_by_name');
+const departmentInfoById = require('./lib/commands/department_info_by_id');
+const departmentInfoByName = require('./lib/commands/department_info_by_name');
+const user = require('./lib/commands/user');
 
 (async () => {
   program
@@ -15,42 +23,49 @@ const fs = require('fs');
   program
     .command('status <tenant>')
     .description('Retrieve the LDAP status of a tenant')
-    .action(async (tenant, options) => {
-      // Unpack the variables
-      const username = program.username;
-      const password = program.password;
-      const url = program.url;
+    .action(status);
 
-      console.log(`username = ${username}`)
-      console.log(`password = ${password}`)
-      console.log(`url = ${url}`)
-      console.log(`tenant = ${tenant}`)
+  // Add the settings command
+  program
+    .command('settings <tenant>')
+    .description('Retrieve the LDAP settings of a tenant')
+    .action(settings);
 
-      // Log in
-      const authService = new AuthService(url);
-      const loginResult = await authService.login(tenant, username, password);
-      const authTokenKey = loginResult.authTokenKey;
-      const userId = loginResult.userId;
-      
-      // Execute the status
-      const ldapService = new LDAPService(url);
-      const result = await ldapService.status(authTokenKey, tenant);
-      result.lastSynchronizedDate = new Date(result.lastSynchronizedDate);
-      result.departmentStatuses.forEach(entry => {
-        entry.updated = new Date(entry.updated);
-      });
+  // Ad-hoc query
+  program
+    .command('query <tenant> <searchbase> [filters...]')
+    .description('Execute an ad-hoc query against the tenants configured LDAP servers.')
+    .action(query);
 
-      if (program.output) {
-        fs.writeFileSync(program.output, JSON.stringify(result, null, 2), 'utf8');
-        console.log(`wrote out results to ${program.output}`);
-      } else {
-        console.log(JSON.stringify(result, null, 2));
-      }
+  // Retrieve sync query results for a given department by id
+  program
+    .command('department-query-id <tenant> <departmentId>')
+    .description('Execute the LDAP queries stored for a specific department by id.')
+    .action(departmentQueryById);
 
-      // Log out
-      await authService.logout(authTokenKey, tenant, userId);
-    })
-    ;
+  // Retrieve sync query results for a given department by name
+  program
+    .command('department-query-name <tenant> <departmentName>')
+    .description('Execute the LDAP queries stored for a specific department by its name.')
+    .action(departmentQueryByName);
+
+  // Retrieve the LDAP information for a department by its department id.
+  program
+    .command('department-info-id <tenant> <departmentId>')
+    .description('Retrieve the ldap filters set up for a specific department by id.')
+    .action(departmentInfoById);
+
+  // Retrieve the LDAP information for a department by its department name.
+  program
+    .command('department-info-name <tenant> <departmentName>')
+    .description('Retrieve the ldap filters set up for a specific department by name.')
+    .action(departmentInfoByName);
+
+  // Retrieve a specific user information from the LDAP server.
+  program
+    .command('user <tenant> <username>')
+    .description('Retrieve the ldap information about a specified username.')
+    .action(user);
 
   await program.parseAsync(process.argv);
 })().then(() => {}).catch(err => console.error(err));
