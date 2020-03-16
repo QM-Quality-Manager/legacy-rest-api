@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "A command line tool to interact with the LDAP services for debugging purposes. User requires LDAP permissions to execute.",
   "main": "index.js",
-  "bin": "bin.js",
+  "bin": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-cli": "pkg -t node12-macos,node12-win -o qmplus-ldap-cli index.js"
   },
   "author": "Christian Kvalheim Amor",
   "license": "Apache-2.0",
@@ -14,5 +15,8 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "request-promise-native": "^1.0.8"
+  },
+  "devDependencies": {
+    "pkg": "^4.4.4"
   }
 }

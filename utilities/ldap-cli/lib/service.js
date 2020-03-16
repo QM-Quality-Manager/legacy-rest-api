@@ -7,7 +7,7 @@ class BaseService {
 
   async executeOperation(path, body) {
     var body = Object.assign({}, body);
-    console.log(`${this.__endPoint}${path}`)
+    // console.log(`${this.__endPoint}${path}`)
 
     var options = {
       method: 'POST',
