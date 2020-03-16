@@ -14,6 +14,7 @@ const user = require('./lib/commands/user');
 (async () => {
   program
     .version('0.0.1')
+    .name('qplus-ldap-cli')
     .requiredOption('-u, --username <username>', 'provide a username with LDAP permissions')
     .requiredOption('-p, --password <password>', 'provide a password with LDAP permissions')
     .option('-l, --url <url>', 'override end point', 'https://www.qmplus.com/qmplus/rest')
